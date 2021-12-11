@@ -1,7 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link,useNavigate  } from "react-router-dom";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { useActions } from "../../../hooks/useActions";
 
-const Header = () => {
+const Header: React.FC = () => {
+
+  //const navigate = useNavigate();
+  const{LogoutUser } = useActions();
+  // const onClickHandler = (e: React.MouseEvent<HTMLAnchorElement>) => 
+  // {
+  //     e.preventDefault();
+  //     localStorage.removeItem('access_token');
+  //     LogoutUser();
+  //     navigate('/');
+  // }
+
   const { isAuth, user } = useTypedSelector((store) => store.auth);
 
   return (
@@ -37,7 +49,7 @@ const Header = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/logout">
+                <Link className="nav-link" to="/" onClick={LogoutUser}>
                   Вихід
                 </Link>
               </li>

@@ -8,5 +8,5 @@ export const LoginSchema = Yup.object({
   password: Yup.string()
       .required('Вкажіть пароль.')
       .min(5, 'Пароль має містить мінімум 5 символів.')
-      .matches(/[a-zA-Z]/, 'Пароль має містить латинські символи.'),
+      //.matches(/[a-zA-Z]/, 'Пароль має містить латинські символи.'),
 });

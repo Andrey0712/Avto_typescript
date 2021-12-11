@@ -2,9 +2,9 @@ import axios, { AxiosError } from 'axios';
 import { Dispatch } from 'react';
 import http from '../../../http_common';
 import jwt from 'jsonwebtoken';
-import { AuthAction, AuthActionTypes, ILoginModel, ILoginResponse, ILoginServerError, IUser } from './types';
+import { AuthAction, AuthActionTypes, ILoginModel, ILoginResponse, ILoginServerError, IUser,Logout_auth,LoginAuthAction } from './types';
 
-export const LoginUser = (data: ILoginModel) => async (dispatch: Dispatch<AuthAction>) => {
+export const LoginUser = (data: ILoginModel) => async (dispatch: Dispatch<LoginAuthAction>) => {
     try {
         const response = await http.post<ILoginResponse>("api/auth/login", data);
         const {access_token} = response.data;
@@ -13,6 +13,7 @@ export const LoginUser = (data: ILoginModel) => async (dispatch: Dispatch<AuthAc
             type: AuthActionTypes.LOGIN_AUTH,
             payload: user
         });
+        localStorage.setItem('access_token', access_token);
         return Promise.resolve();
     }
     catch(ex) {
@@ -27,4 +28,10 @@ export const LoginUser = (data: ILoginModel) => async (dispatch: Dispatch<AuthAc
         }
         return Promise.reject(ex);
     }
+}
+
+export const LogoutUser = () => async (dispatch: Dispatch<Logout_auth>) => {
+    console.log("выход");
+    dispatch({ type: AuthActionTypes.LOGOUT });
+    localStorage.removeItem('access_token');
 }
