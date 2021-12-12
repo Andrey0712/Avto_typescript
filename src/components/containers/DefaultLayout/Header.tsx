@@ -4,16 +4,9 @@ import { useActions } from "../../../hooks/useActions";
 
 const Header: React.FC = () => {
 
-  //const navigate = useNavigate();
+  
   const{LogoutUser } = useActions();
-  // const onClickHandler = (e: React.MouseEvent<HTMLAnchorElement>) => 
-  // {
-  //     e.preventDefault();
-  //     localStorage.removeItem('access_token');
-  //     LogoutUser();
-  //     navigate('/');
-  // }
-
+ 
   const { isAuth, user } = useTypedSelector((store) => store.auth);
 
   return (

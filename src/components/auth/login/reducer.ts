@@ -12,6 +12,14 @@ export const authReducer = (state=inialState, action: AuthAction) : AuthState =>
                 ...state, isAuth: true, user: action.payload
             };
         }
+        case AuthActionTypes.LOGOUT: {
+            return { isAuth: false,
+                user: {
+                email: '',
+                image: ''
+              }
+            };
+        }
         
         default:
             return state;

@@ -8,12 +8,14 @@ export const LoginUser = (data: ILoginModel) => async (dispatch: Dispatch<LoginA
     try {
         const response = await http.post<ILoginResponse>("api/auth/login", data);
         const {access_token} = response.data;
-        const user = jwt.decode(access_token) as IUser;
-        dispatch({
-            type: AuthActionTypes.LOGIN_AUTH,
-            payload: user
-        });
-        localStorage.setItem('access_token', access_token);
+        localStorage.loginUser = access_token;//ложем в локалсторедж
+        AuthUser(access_token, dispatch);
+        // const user = jwt.decode(access_token) as IUser;
+        // dispatch({
+        //     type: AuthActionTypes.LOGIN_AUTH,
+        //     payload: user
+        // });
+        // localStorage.setItem('access_token', access_token);
         return Promise.resolve();
     }
     catch(ex) {
@@ -35,3 +37,10 @@ export const LogoutUser = () => async (dispatch: Dispatch<Logout_auth>) => {
     dispatch({ type: AuthActionTypes.LOGOUT });
     localStorage.removeItem('access_token');
 }
+
+export const AuthUser = (token: string, dispatch: Dispatch<LoginAuthAction>) =>  {
+    const user = jwt.decode(token) as IUser;
+    dispatch({
+      type: AuthActionTypes.LOGIN_AUTH,
+      payload: user,
+    });}
