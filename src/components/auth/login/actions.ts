@@ -38,7 +38,7 @@ export const LogoutUser = () => async (dispatch: Dispatch<Logout_auth>) => {
     localStorage.removeItem('access_token');
 }
 
-export const AuthUser = (token: string, dispatch: Dispatch<LoginAuthAction>) =>  {
+export const AuthUser = (token: string, dispatch: Dispatch<any>) =>  {
     const user = jwt.decode(token) as IUser;
     dispatch({
       type: AuthActionTypes.LOGIN_AUTH,

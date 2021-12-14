@@ -5,7 +5,7 @@ interface InputGroupProps {
   label: string;
   field: string;
   touched?: boolean;
-  type?: "text" | "email" | "password";
+  type?: "text" | "email" | "password" | "file"| "number" 
   error?: null | string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
