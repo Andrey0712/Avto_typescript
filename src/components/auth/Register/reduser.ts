@@ -10,8 +10,7 @@ const initialState: RegisterState = {
      
       case RegisterActionTypes.REGISTER:
         return {
-          ...state,
-          isRegisterd: true,
+          ...state, isRegisterd: true,
           data: action.payload, 
         };
   

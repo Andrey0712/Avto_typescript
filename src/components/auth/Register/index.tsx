@@ -24,9 +24,7 @@ const RegisterPage = () => {
       setImg( URL.createObjectURL(file));
     }
       
-    const onHandleSubmit = async (values: IRegister,
-      { setFieldError }: FormikHelpers<IRegister>
-    ) => {
+    const onHandleSubmit = async (values: IRegister,{ setFieldError }: FormikHelpers<IRegister> ) => {
       const formData = new FormData();
       Object.entries(values).forEach(([key, value]) =>
         formData.append(key, value)
@@ -35,7 +33,7 @@ const RegisterPage = () => {
         try {
           
           await RegisterUser(formData);
-          await navigator("/");
+          navigator("/");
           
         } catch (err) {
           
@@ -55,13 +53,7 @@ const RegisterPage = () => {
       onSubmit: onHandleSubmit,
     });
   
-      const {
-        errors,
-        touched,
-        handleChange,
-        handleSubmit,
-        setFieldValue
-      } = formik;
+      const {errors,touched,handleChange,handleSubmit,setFieldValue} = formik;
     
     return (
       <div className="row">
@@ -118,12 +110,8 @@ const RegisterPage = () => {
               
               <div className="text-center">
                 <button
-                  type="submit"
-                  className="btn btn-secondary"
+                  type="submit"className="btn-btn-default">Реєстрація </button>      
                   
-                >
-                  Реєстрація
-                </button>
               </div>
             </Form>
           </FormikProvider>
