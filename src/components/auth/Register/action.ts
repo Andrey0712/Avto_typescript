@@ -4,8 +4,7 @@ import http from '../../../http_common';
 import { RegisterAction, RegisterActionTypes, RegisterErrors } from './types';
 import { AuthUser } from '../login/actions';
 
-export const RegisterUser = (data: FormData) => {
-    return async (dispatch: Dispatch<RegisterAction>) => {
+export const RegisterUser = (data: FormData) => {return async (dispatch: Dispatch<RegisterAction>) => {
       try {
         const response = await http.post("api/auth/register", data, {
           headers: { "Content-Type": "multipart/form-data" },

@@ -33,6 +33,11 @@ const Header: React.FC = () => {
                 Додати авто
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/products">
+                Products
+              </Link>
+            </li>
           </ul>
           {isAuth ? (
             <ul className="navbar-nav">
