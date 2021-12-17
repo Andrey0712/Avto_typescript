@@ -12,6 +12,9 @@ const ProductsListPage: React.FC = () => {
       (store) => store.products
     );
     const { fetchProducts } = useActions();
+    const [name, setName] = useState<string>("");
+  const navigator = useNavigate();
+  const [query, setQuery] = useState<string>(window.location.search);
 
     async function getProducts(search: ISearchProduct) {
         setLoading(true);
@@ -31,6 +34,12 @@ const ProductsListPage: React.FC = () => {
         getProducts(search);
 
     },[])
+
+    const pages = [];
+  for (let i = 1; i <= last_page; i++) {
+    pages.push(i);//перебор страниц
+  }
+
     return (
         <>
           <h1 className="text-center">Товари</h1>
@@ -57,7 +66,32 @@ const ProductsListPage: React.FC = () => {
           })}
         </tbody>
       </table>
-          
+
+         <nav aria-label="Page navigation example">
+        <ul className="pagination">
+          {pages.map((page, key) => {
+            const url = "?page=" + page + "&name=" + name;
+            return (
+              <li
+                className={classNames("page-item", {
+                  active: current_page == page,//отобразить активную стр
+                })}
+                key={key}
+              >
+                <Link
+                  className="page-link"
+                  to={url}
+                  onClick={() => {
+                    setQuery(url);
+                  }}
+                >
+                  {page}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav> 
     
           
         </>
