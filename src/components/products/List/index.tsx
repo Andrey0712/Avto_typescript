@@ -59,9 +59,9 @@ const ProductsListPage: React.FC = () => {
     setQuery("?name=" + name);
     navigator("?name=" + name);
   };
-  const onHandleSubmit1 = (e: any) => {
+  const onHandleSubmit_description = (e: any) => {
     e.preventDefault();
-    const description = (document.getElementById("search") as HTMLInputElement).value;
+    const description = (document.getElementById("search_description") as HTMLInputElement).value;
     console.log("search", description);
     setQuery("?description=" + description);
     navigator("?description=" + description);
@@ -85,10 +85,10 @@ const ProductsListPage: React.FC = () => {
         </button>
       </form><br></br>
 
-      <form className="d-flex" onSubmit={onHandleSubmit1}>
+      <form className="d-flex" onSubmit={onHandleSubmit_description}>
         <input
           className="form-control me-2"
-          id="search"
+          id="search_description"
           type="search"
           placeholder="Search by description"
           aria-label="Search"
