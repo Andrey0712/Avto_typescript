@@ -20,9 +20,11 @@ export interface IProductsResponse {
 
 //Модель для пошуку продуктів
 export interface ISearchProduct {
-    page: number|string
+    page: null|string|number
     name?: null|string
+    description?: null|string
 }
+
 
 //Стейт для редусера
 export interface ProductsState {

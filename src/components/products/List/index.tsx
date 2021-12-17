@@ -5,6 +5,8 @@ import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { ISearchProduct } from "../types";
 import { useNavigate } from "react-router";
+import qs from "qs"
+import { useSearchParams } from "react-router-dom";
 
 const ProductsListPage: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -13,7 +15,9 @@ const ProductsListPage: React.FC = () => {
     );
     const { fetchProducts } = useActions();
     const [name, setName] = useState<string>("");
+    const [description, setDescription] = useState<string>("");
   const navigator = useNavigate();
+  
   const [query, setQuery] = useState<string>(window.location.search);
 
     async function getProducts(search: ISearchProduct) {
@@ -26,25 +30,75 @@ const ProductsListPage: React.FC = () => {
         }
       }
 
-    useEffect(()=>{
+      useEffect(() => {
+        const params = new URLSearchParams(query);
+        const name = params?.get("name") ?? "";
+        const description = params?.get("description") ?? "";
 
+        setName(name);
+        setDescription(description);
         const search: ISearchProduct = {
-            page: 1
-          };
-        getProducts(search);
-
-    },[])
+          page: params?.get("page") ?? 1,
+          description:description,
+          name: name,
+          
+        };
+        
+         getProducts(search);
+      }, [query]);
 
     const pages = [];
   for (let i = 1; i <= last_page; i++) {
     pages.push(i);//перебор страниц
   }
 
+  const onHandleSubmit = (e: any) => {
+    e.preventDefault();
+    const name = (document.getElementById("search") as HTMLInputElement).value;
+    console.log("search", name);
+    setQuery("?name=" + name);
+    navigator("?name=" + name);
+  };
+  const onHandleSubmit1 = (e: any) => {
+    e.preventDefault();
+    const description = (document.getElementById("search") as HTMLInputElement).value;
+    console.log("search", description);
+    setQuery("?description=" + description);
+    navigator("?description=" + description);
+  };
+
+  
     return (
         <>
           <h1 className="text-center">Товари</h1>
           
-    
+          <form className="d-flex" onSubmit={onHandleSubmit}>
+        <input
+          className="form-control me-2"
+          id="search"
+          type="search"
+          placeholder="Search by name"
+          aria-label="Search"
+        />
+        <button className="btn btn-outline-success" type="submit">
+          Search
+        </button>
+      </form><br></br>
+
+      <form className="d-flex" onSubmit={onHandleSubmit1}>
+        <input
+          className="form-control me-2"
+          id="search"
+          type="search"
+          placeholder="Search by description"
+          aria-label="Search"
+        />
+        <button className="btn btn-outline-success" type="submit">
+          Search
+        </button>
+      </form>
+
+          
           {loading && <h2>Loading ...</h2>}
           <table className="table">
         <thead>
@@ -67,10 +121,14 @@ const ProductsListPage: React.FC = () => {
         </tbody>
       </table>
 
+      <h4>Всього записів: {total}</h4>
+      <hr />
+
          <nav aria-label="Page navigation example">
         <ul className="pagination">
+        
           {pages.map((page, key) => {
-            const url = "?page=" + page + "&name=" + name;
+            const url = "?page=" + page + "&name=" + name +"&description=" + description;
             return (
               <li
                 className={classNames("page-item", {
@@ -93,7 +151,7 @@ const ProductsListPage: React.FC = () => {
         </ul>
       </nav> 
     
-          
+      
         </>
       );
 };
