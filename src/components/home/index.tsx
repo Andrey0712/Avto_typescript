@@ -33,10 +33,7 @@ const Home: React.FC=()=> {
                     </tbody>
                 </table>
             </div>
-{/* <div>
-                
-                       <iframe src="https://www.copart.com/ru/vehicleFinder" width="100%" height="500px" scrolling="auto"> </iframe>
-            </div> */}
+
         </>
             
             
