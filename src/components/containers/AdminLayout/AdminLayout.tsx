@@ -3,6 +3,9 @@ import * as React from "react";
 import { Outlet } from "react-router-dom";
 import { Layout, Menu, Breadcrumb } from 'antd';
 import AdminMenu from './AdminMenu';
+import NoMatch from '../../NoMatch';
+import CropperPage from '../../admin/CropperPage'
+
 const AdminLayout : React.FC = () => {
     
     const { Header, Content, Footer } = Layout;
@@ -12,11 +15,16 @@ const AdminLayout : React.FC = () => {
         <Layout>
           <Header className="header">
             <div className="logo" />
+            {/* <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]}>
+            {new Array(15).fill(null).map((_, index) => {
+              const key = index + 1;
+              return <Menu.Item key={key}>{`nav ${key}`}</Menu.Item>;
+            })}
+          </Menu> */}
             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]}>
               <Menu.Item key="1">nav 1</Menu.Item>
               <Menu.Item key="2">nav 2</Menu.Item>
-              <Menu.Item key="3">nav 3</Menu.Item>
-            </Menu>
+              </Menu>
           </Header>
           <Content style={{ padding: "0 50px" }}>
             <Breadcrumb style={{ margin: "16px 0" }}>
@@ -30,7 +38,9 @@ const AdminLayout : React.FC = () => {
             >
              <AdminMenu/>
               <Content style={{ padding: "0 24px", minHeight: 280 }}>
-                <Outlet />
+                {/* <Outlet /> */}
+                <CropperPage />
+                {/* <NoMatch /> */}
               </Content>
             </Layout>
           </Content>

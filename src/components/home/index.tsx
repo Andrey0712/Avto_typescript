@@ -11,7 +11,7 @@ const Home: React.FC=()=> {
     const { getAvto } = useTypedSelector(state => state.avtoSale);
         return (
             <>
-            <h1 className="text-center">Авто из США</h1>
+            <h1 className="text-center">Magaz</h1>
             <div className="offset-2 col-md-8">
             <table className="table table-success table-striped">
                     <thead className="table-primary">

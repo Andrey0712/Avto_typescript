@@ -9,6 +9,7 @@ import Home from './components/home';
 import NoMatch from './components/NoMatch';
 import DefaultLayout from './components/containers/DefaultLayout';
 import AdminLayout from './components/containers/AdminLayout';
+import CropperPage from './components/admin/CropperPage'
 
 function App() {
   return (
@@ -23,7 +24,10 @@ function App() {
           </Route>
 
           <Route path="/admin" element={<AdminLayout/>} >
-          </Route><Route index element={<Home />} />
+          <Route index element={<Home />} />
+          <Route path="cropper" element={<CropperPage />} />
+          <Route path="*" element={<NoMatch />} />
+          </Route>
       </Routes>
   
     </BrowserRouter>

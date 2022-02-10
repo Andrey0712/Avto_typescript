@@ -6,13 +6,13 @@ export const GetlistAvto = () => async (dispatch: Dispatch<AvtoList>) => {
         type: AvtoSaleTypes.GET_avto, payload: [
             {
                 id: 1,
-                name:'Audi',
-                price: 10000
+                name:'Сало',
+                price: 150
             },
             {
                 id: 2,
-                name:'BMW',
-                price: 9000
+                name:'Мясо',
+                price: 180
             }
             
         ]
